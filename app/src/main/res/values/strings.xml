@@ -4,4 +4,6 @@
     <!--fb essentials-->
     <string name="facebook_app_id">281819542455161</string>
     <string name="fb_login_protocol_scheme">fb281819542455161</string>
+    <string name="splash_logo">splash_logo</string>
+    <string name="pathok_url">pathok.xyz</string>
 </resources>
