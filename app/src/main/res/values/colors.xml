@@ -6,4 +6,5 @@
 
     //shahad's defined
     <color name="splash_back">#D81B60</color>
+    <color name="white">#ffffff</color>
 </resources>
