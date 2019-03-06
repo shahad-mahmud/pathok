@@ -19,17 +19,32 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class ActivitySplash extends AppCompatActivity {
 
-    private LoginButton fbLoginButton; //fb login button
+    //fb login essentials
+    private LoginButton fbLoginButton;
     private AccessToken fbAccessToken;
     private CallbackManager fbCallbackManager;
+
+    //google sign in essentials
+    private GoogleSignInAccount account;
+    private GoogleSignInClient googleSignInClient;
+    private SignInButton googleSignInButton;
+    private static final int GOOGLE_LOGIN_RC = 2019;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,26 +57,52 @@ public class ActivitySplash extends AppCompatActivity {
         //find all the elements
         findElements();
 
-        fbLoginButton.setReadPermissions(Arrays.asList("public_profile", "email"));
+        //request google user's information
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestProfile()
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
-        if(!isLoggedInFb()){
-            Toast.makeText(getApplicationContext(), "not", Toast.LENGTH_LONG).show();
+        //check if someone is logged in or not
+        if(isLoggedInGoole() || isLoggedInFb()){ //logged in
+            //hide the login/sign in buttons
+            fbLoginButton.setVisibility(View.GONE);
+            googleSignInButton.setVisibility(View.GONE);
+
+
+        }else{ //not logged in
             fbLoginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     logIntoFb();
                 }
             });
+            googleSignInButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    signIntoGoole();
+                }
+            });
         }
-        //*************fb login handling*************
     }
 
     //-----------------------------------onCreate()_finishes------------------------------------------
 
+    void findElements(){
+        fbLoginButton = (LoginButton) findViewById(R.id.splash_fb_login_button);
+        googleSignInButton = (SignInButton) findViewById(R.id.splash_google_sign_in_button);
+    }
+
     boolean isLoggedInFb(){
         fbAccessToken = AccessToken.getCurrentAccessToken();
         return fbAccessToken != null && !fbAccessToken.isExpired();
+    }
+
+    boolean isLoggedInGoole(){
+        account = GoogleSignIn.getLastSignedInAccount(this);
+        return account != null;
     }
 
     void logIntoFb(){
@@ -85,15 +126,47 @@ public class ActivitySplash extends AppCompatActivity {
             }
         });
     }
-    void findElements(){
-        fbLoginButton = (LoginButton) findViewById(R.id.splash_fb_login_button);
+
+    void signIntoGoole(){
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, GOOGLE_LOGIN_RC);
     }
+
 
     //get facebook result from login activity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        fbCallbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == GOOGLE_LOGIN_RC){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleGoogleSignInResult(task);
+        }else{
+            fbCallbackManager.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void handleGoogleSignInResult(Task<GoogleSignInAccount> completedTask){
+        try {
+            account = completedTask.getResult(ApiException.class);
+            getGoogleUserProfileData();
+        } catch (ApiException e) {
+            Log.w("splash", "signInResult:failed code=" + e.getStatusCode());
+        }
+    }
+
+    private void getGoogleUserProfileData(){
+        account = GoogleSignIn.getLastSignedInAccount(this);
+
+        if(account != null){
+            String name = Objects.requireNonNull(account).getDisplayName();
+            String email = account.getEmail();
+            String imageUrl = Objects.requireNonNull(account.getPhotoUrl()).toString();
+
+            Log.e("google infos, name", name);
+            Log.e("google infos, email", email);
+            Log.e("google infos, image", imageUrl);
+        }
     }
 
     private void getFbUserProfileData(AccessToken accessToken){
@@ -104,8 +177,12 @@ public class ActivitySplash extends AppCompatActivity {
                     String userName = object.getString("name");
                     String userEmail = object.getString("email");
 
+                    Profile profile = Profile.getCurrentProfile();
+                    String userImage = profile.getProfilePictureUri(50,50).toString();
+
                     Log.e("fb infos, name", userName);
                     Log.e("fb infos, email", userEmail);
+                    Log.e("fb infos, image", userImage);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
