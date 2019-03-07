@@ -6,4 +6,5 @@
     <string name="fb_login_protocol_scheme">fb281819542455161</string>
     <string name="splash_logo">splash_logo</string>
     <string name="pathok_url">pathok.xyz</string>
+    <string name="login_with_facebook">Login with Facebook</string>
 </resources>
