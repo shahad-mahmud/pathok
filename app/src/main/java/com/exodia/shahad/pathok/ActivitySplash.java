@@ -1,6 +1,8 @@
 package com.exodia.shahad.pathok;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -30,8 +32,11 @@ import com.google.android.gms.tasks.Task;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 public class ActivitySplash extends AppCompatActivity {
 
@@ -57,34 +62,42 @@ public class ActivitySplash extends AppCompatActivity {
         //find all the elements
         findElements();
 
-        //request google user's information
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .requestProfile()
-                .build();
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
+        if(isInternetAvailable()){
+            //request google user's information
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .requestProfile()
+                    .build();
+            googleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
-        //check if someone is logged in or not
-        if(isLoggedInGoole() || isLoggedInFb()){ //logged in
-            //hide the login/sign in buttons
-            fbLoginButton.setVisibility(View.GONE);
-            googleSignInButton.setVisibility(View.GONE);
+            //check if someone is logged in or not
+            if(isLoggedInGoogle() || isLoggedInFb()){ //logged in
+                //hide the login/sign in buttons
+                fbLoginButton.setVisibility(View.GONE);
+                googleSignInButton.setVisibility(View.GONE);
 
-
-        }else{ //not logged in
-            fbLoginButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    logIntoFb();
+                if(isLoggedInFb()){
+                    getFbUserProfileData(AccessToken.getCurrentAccessToken());
+                }else if(isLoggedInGoogle()){
+                    getGoogleUserProfileData();
                 }
-            });
-            googleSignInButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    signIntoGoole();
-                }
-            });
+            }else{ //not logged in
+                fbLoginButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        logIntoFb();
+                    }
+                });
+                googleSignInButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        signIntoGoogle();
+                    }
+                });
+            }
+        }else{
+            Toast.makeText(this, "not internet", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -100,7 +113,7 @@ public class ActivitySplash extends AppCompatActivity {
         return fbAccessToken != null && !fbAccessToken.isExpired();
     }
 
-    boolean isLoggedInGoole(){
+    boolean isLoggedInGoogle(){
         account = GoogleSignIn.getLastSignedInAccount(this);
         return account != null;
     }
@@ -127,7 +140,7 @@ public class ActivitySplash extends AppCompatActivity {
         });
     }
 
-    void signIntoGoole(){
+    void signIntoGoogle(){
         Intent signInIntent = googleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, GOOGLE_LOGIN_RC);
     }
@@ -166,6 +179,8 @@ public class ActivitySplash extends AppCompatActivity {
             Log.e("google infos, name", name);
             Log.e("google infos, email", email);
             Log.e("google infos, image", imageUrl);
+
+            nextActivity(name, email, imageUrl);
         }
     }
 
@@ -183,6 +198,8 @@ public class ActivitySplash extends AppCompatActivity {
                     Log.e("fb infos, name", userName);
                     Log.e("fb infos, email", userEmail);
                     Log.e("fb infos, image", userImage);
+
+                    nextActivity(userName, userEmail, userImage);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -203,4 +220,40 @@ public class ActivitySplash extends AppCompatActivity {
             }
         }
     };
+
+    void nextActivity(String userName, String userEmail, String userImage){
+        Log.e("sdsdf", "dddd");
+        BackgroundLoginManager backgroundLoginManager = new BackgroundLoginManager(getApplicationContext());
+        String result;
+        try {
+            result = backgroundLoginManager.execute(userName, userEmail, userImage).get();
+            Log.e("Splash, result: ", result);
+
+            if(!result.equals("false")){
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish(); //kill this activity
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    boolean isInternetAvailable(){
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(cm.getActiveNetworkInfo() != null){
+            try {
+                InetAddress ipAddress = InetAddress.getByName("https://www.google.com/");
+
+                return !ipAddress.equals("");
+            } catch (UnknownHostException e) {
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }
 }

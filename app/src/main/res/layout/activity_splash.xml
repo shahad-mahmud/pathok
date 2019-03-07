@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="2dp">
 
         <ImageView
             android:id="@+id/splash_logo"
@@ -27,13 +28,20 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
-            android:padding="10dp"
-            android:textSize="18sp"/>
+            android:padding="4dp"
+            android:textSize="16sp"/>
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/splash_google_sign_in_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            />
+
+        <ProgressBar
+            android:id="@+id/splash_progress_bar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
 
