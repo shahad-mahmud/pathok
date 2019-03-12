@@ -4,7 +4,12 @@
     <!--fb essentials-->
     <string name="facebook_app_id">281819542455161</string>
     <string name="fb_login_protocol_scheme">fb281819542455161</string>
+
+
+    //auto generated
     <string name="splash_logo">splash_logo</string>
     <string name="pathok_url">pathok.xyz</string>
     <string name="login_with_facebook">Login with Facebook</string>
+    <string name="sign_in_with_google">Sign In with Google</string>
+    <string name="no_internet">No Internet Connection Available!</string>
 </resources>

@@ -8,10 +8,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -22,31 +22,27 @@ import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
-import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class ActivitySplash extends AppCompatActivity {
 
-    private ImageView noWifi;
-    LinearLayout fbContainer, googleContainer;
+    private LinearLayout fbContainer, googleContainer, noWifi;
+    private ImageView logo;
+    private ProgressBar progressBar;
 
     //fb login essentials
     private Button fbLoginButton;
@@ -84,8 +80,9 @@ public class ActivitySplash extends AppCompatActivity {
             //check if someone is logged in or not
             if(isLoggedInGoogle() || isLoggedInFb()){ //logged in
                 //hide the login/sign in buttons
-                fbLoginButton.setVisibility(View.GONE);
-                googleSignInButton.setVisibility(View.GONE);
+                fbContainer.setVisibility(View.GONE);
+                googleContainer.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
 
                 if(isLoggedInFb()){
                     getFbUserProfileData(AccessToken.getCurrentAccessToken());
@@ -93,6 +90,10 @@ public class ActivitySplash extends AppCompatActivity {
                     getGoogleUserProfileData();
                 }
             }else{ //not logged in
+                fbContainer.setVisibility(View.VISIBLE);
+                googleContainer.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+
                 fbLoginButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -107,11 +108,13 @@ public class ActivitySplash extends AppCompatActivity {
                 });
             }
         }else{
+            logo.setVisibility(View.GONE);
             fbContainer.setVisibility(View.GONE);
             googleContainer.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
 
             noWifi.setVisibility(View.VISIBLE);
-            Toast.makeText(this, "not internet", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "not internet", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -120,9 +123,11 @@ public class ActivitySplash extends AppCompatActivity {
     void findElements(){
         fbLoginButton = (Button) findViewById(R.id.splash_fb_login_button);
         googleSignInButton = (Button) findViewById(R.id.splash_google_sign_in_button);
-        noWifi = (ImageView) findViewById(R.id.splash_no_wifi);
+        noWifi = (LinearLayout) findViewById(R.id.splash_no_wifi);
         fbContainer = (LinearLayout) findViewById(R.id.splash_fb_login_button_container);
         googleContainer = (LinearLayout) findViewById(R.id.splash_google_sign_in_button_container);
+        logo = (ImageView) findViewById(R.id.splash_logo);
+        progressBar = (ProgressBar) findViewById(R.id.splash_progress_bar);
     }
 
     boolean isLoggedInFb(){
@@ -148,7 +153,7 @@ public class ActivitySplash extends AppCompatActivity {
 
             @Override
             public void onCancel() {
-                Toast.makeText(getApplicationContext(), "canceled", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Canceled Login", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -194,9 +199,9 @@ public class ActivitySplash extends AppCompatActivity {
             String email = account.getEmail();
             String imageUrl = Objects.requireNonNull(account.getPhotoUrl()).toString();
 
-            Log.e("google infos, name", name);
-            Log.e("google infos, email", email);
-            Log.e("google infos, image", imageUrl);
+//            Log.e("google infos, name", name);
+//            Log.e("google infos, email", email);
+//            Log.e("google infos, image", imageUrl);
 
             nextActivity(name, email, imageUrl);
         }
@@ -213,9 +218,9 @@ public class ActivitySplash extends AppCompatActivity {
                     Profile profile = Profile.getCurrentProfile();
                     String userImage = profile.getProfilePictureUri(50,50).toString();
 
-                    Log.e("fb infos, name", userName);
-                    Log.e("fb infos, email", userEmail);
-                    Log.e("fb infos, image", userImage);
+//                    Log.e("fb infos, name", userName);
+//                    Log.e("fb infos, email", userEmail);
+//                    Log.e("fb infos, image", userImage);
 
                     nextActivity(userName, userEmail, userImage);
                 } catch (JSONException e) {
@@ -240,12 +245,12 @@ public class ActivitySplash extends AppCompatActivity {
     };
 
     void nextActivity(String userName, String userEmail, String userImage){
-        Log.e("sdsdf", "dddd");
+//        Log.e("sdsdf", "dddd");
         BackgroundLoginManager backgroundLoginManager = new BackgroundLoginManager(getApplicationContext());
         String result;
         try {
             result = backgroundLoginManager.execute(userName, userEmail, userImage).get();
-            Log.e("Splash, result: ", result);
+//            Log.e("Splash, result: ", result);
 
             if(!result.equals("false")){
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
