@@ -35,4 +35,11 @@ dependencies {
 
     //for google sign in
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
+
+    //coordinateLayput
+//    implementation 'com.android.support:coordinatorlayout:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+
+    //bottomNavigationViewEx
+    implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.2'
 }
