@@ -5,6 +5,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.exodia.shahad.pathok.Fragments.FragmentBooks;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mainViewPager;
     private BottomNavigationViewEx bottomNav;
     private MenuItem prevMenuItem;
+    private Toolbar topNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
     private void findElements(){
         mainViewPager = (ViewPager) findViewById(R.id.home_fragment_container);
         bottomNav = (BottomNavigationViewEx) findViewById(R.id.home_bottom_nav);
+        topNav = (Toolbar) findViewById(R.id.home_top_nav);
     }
 
     private void setUpBottomNavigation(){
