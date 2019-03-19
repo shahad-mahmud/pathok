@@ -8,8 +8,8 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="170dp"
-        android:layout_height="200dp"
+        android:layout_width="160dp"
+        android:layout_height="190dp"
         android:layout_gravity="center_horizontal"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher_background" />

@@ -1,4 +1,4 @@
-package com.exodia.shahad.pathok;
+package com.exodia.shahad.pathok.BackgroundWorkers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -31,7 +31,7 @@ public class BackgroundLoginManager extends AsyncTask<String, Void, String> {
     private static final String PROFILE_IMAGE = "profileImage";
 
 
-    BackgroundLoginManager(Context context) {
+    public BackgroundLoginManager(Context context) {
         this.context = context;
     }
 

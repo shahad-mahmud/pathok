@@ -11,6 +11,7 @@
     android:paddingBottom="4dp">
 
     <TextView
+        android:id="@+id/fragment_books_category_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="1dp"

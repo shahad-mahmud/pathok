@@ -10,14 +10,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.exodia.shahad.pathok.BackgroundWorkers.BackgroundBookCategoryLoader;
 import com.exodia.shahad.pathok.R;
-import com.exodia.shahad.pathok.RecyclerViewAdapters.BrowseBookAdapter;
 import com.exodia.shahad.pathok.RecyclerViewAdapters.BrowseBookCategoryAdapter;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class FragmentBooks extends Fragment {
 
     private View view;
     private RecyclerView bookSuggestionRecyclerView;
+    private List<String> category;
 
     @Nullable
     @Override
@@ -26,10 +34,38 @@ public class FragmentBooks extends Fragment {
         findElements();
 
         bookSuggestionRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         bookSuggestionRecyclerView.setLayoutManager(linearLayoutManager);
 
-        BrowseBookCategoryAdapter adapter = new BrowseBookCategoryAdapter(getContext());
+        category = new ArrayList<>();
+
+        BackgroundBookCategoryLoader categoryLoader = new BackgroundBookCategoryLoader(getActivity());
+        try {
+            String result = categoryLoader.execute().get();
+
+            JSONObject jsonObject;
+            jsonObject = new JSONObject(result);
+
+            String success = jsonObject.getString("success");
+
+            if(success.equals("true")){
+                int size = jsonObject.length();
+
+                for(int i = 0; i < size-1; i++){
+                    String category_name = jsonObject.getString(String.valueOf(i));
+
+                    if(!category.contains(category_name)){
+                        category.add(category_name);
+                    }
+                }
+            }
+        } catch (ExecutionException | JSONException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        BrowseBookCategoryAdapter adapter = new BrowseBookCategoryAdapter(getContext(), category);
         bookSuggestionRecyclerView.setAdapter(adapter);
 
         return view;

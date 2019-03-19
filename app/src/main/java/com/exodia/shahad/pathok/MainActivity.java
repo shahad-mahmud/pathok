@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         setUpBottomNavigation(); //setup the bottom navigation bar
         setUpViewPager(); //setup the view pager initially
 
+        mainViewPager.setOffscreenPageLimit(4); //4 pages in offScreen won't be destroyed
+
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
