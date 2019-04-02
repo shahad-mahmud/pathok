@@ -79,7 +79,7 @@ public class BackgroundBookCategoryLoader extends AsyncTask<Void, Void, String> 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return "result not found";
     }
 
     @Override
