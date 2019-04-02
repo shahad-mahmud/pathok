@@ -1,13 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="4dp">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/create_post_header_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="create_post fragment"
-        android:layout_centerInParent="true"
-        android:textSize="24sp"/>
+        android:padding="2dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/create_post_profile_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="4dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/create_post_profile_image"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/create_post_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Name"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:id="@+id/create_post_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/click_effect"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="3dp">
+
+                <TextView
+                    android:id="@+id/create_post_spinner_value_shown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Book review" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/arrow_drop_down"/>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/create_post_spinner_value_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/create_post_header_layout"
+        android:orientation="vertical"
+        android:paddingBottom="1dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/create_post_spinner_value_creative_writing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/click_effect"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingStart="4dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="8dp"
+            android:text="Creative Writing"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/create_post_spinner_value_book_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/click_effect"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingStart="4dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="8dp"
+            android:text="Book review"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+    <EditText
+        android:layout_marginBottom="45dp"
+        android:id="@+id/create_post_edit_the_post"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/create_post_spinner_value_layout"
+        android:layout_marginTop="4dp"
+        android:background="@null"
+        android:gravity="start"
+        android:hint="@string/edit_text_hint"
+        android:minLines="20"
+        android:padding="2dp" />
+
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/create_post_select_book"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/click_effect"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingStart="1dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="1dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="4dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="10dp"
+            android:text="@string/writing_about" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/arrow_right" />
+    </RelativeLayout>
 
 </RelativeLayout>
