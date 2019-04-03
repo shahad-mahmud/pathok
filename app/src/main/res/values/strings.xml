@@ -14,4 +14,15 @@
     <string name="no_internet">No Internet Connection Available!</string>
     <string name="edit_text_hint">আপনি কি ভাবছেন??</string>
     <string name="writing_about">যে বই সম্পর্কে লিখছেন</string>
+    <string name="has_written_about">সম্পর্কে লিখেছেন।</string>
+    <string name="has_read">পড়েছি</string>
+    <string name="is_reading">পড়ছি</string>
+    <string name="want_to_read">পড়তে চাই</string>
+    <string name="book_image">Book image</string>
+    <string name="post_data">এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট এটা পোস্ট</string>
+    <string name="people_liked"> জন পোস্টটি পছন্দ করেছে</string>
+    <string name="comment_number">টি মন্তব্য</string>
+    <string name="user_name">অমুক, তমুক এবং আরও ১৫ জন ইউজার তমুক করেছে।</string>
+    <string name="has_done">তমুক করেছে।</string>
+    <string name="time">সময়।</string>
 </resources>
