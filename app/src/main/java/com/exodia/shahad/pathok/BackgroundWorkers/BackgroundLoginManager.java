@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.exodia.shahad.pathok.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,13 +25,6 @@ import java.nio.charset.StandardCharsets;
 
 public class BackgroundLoginManager extends AsyncTask<String, Void, String> {
     private Context context;
-
-    private static final String FILE = "user_details";
-    private static final String USER_ID = "userID";
-    private static final String NAME = "name";
-    private static final String EMAIL = "email";
-    private static final String PROFILE_IMAGE = "profileImage";
-
 
     public BackgroundLoginManager(Context context) {
         this.context = context;
@@ -77,7 +72,7 @@ public class BackgroundLoginManager extends AsyncTask<String, Void, String> {
             inputStream.close();
             httpURLConnection.disconnect();
 
-            Log.e("result", String.valueOf(result));
+//            Log.e("result", String.valueOf(result));
 
             return String.valueOf(result);
         } catch (IOException e) {
@@ -118,13 +113,13 @@ public class BackgroundLoginManager extends AsyncTask<String, Void, String> {
     }
 
     private void saveToCache(String userId, String userName, String userEmail, String userImage){
-        SharedPreferences userDetails = context.getSharedPreferences(FILE, Context.MODE_PRIVATE);
+        SharedPreferences userDetails = context.getSharedPreferences(context.getString(R.string.user_info_file), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = userDetails.edit();
 
-        editor.putString(USER_ID, userId);
-        editor.putString(NAME, userName);
-        editor.putString(EMAIL, userEmail);
-        editor.putString(PROFILE_IMAGE, userImage);
+        editor.putString(context.getString(R.string.user_info_file_userID), userId);
+        editor.putString(context.getString(R.string.user_info_file_name), userName);
+        editor.putString(context.getString(R.string.user_info_file_email), userEmail);
+        editor.putString(context.getString(R.string.user_info_file_profileImage), userImage);
 
         editor.apply();
     }

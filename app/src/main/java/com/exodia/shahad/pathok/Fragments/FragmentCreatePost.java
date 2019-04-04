@@ -1,6 +1,7 @@
 package com.exodia.shahad.pathok.Fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,17 +9,24 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.exodia.shahad.pathok.R;
+
+import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FragmentCreatePost extends Fragment {
 
     private LinearLayout spinner, spinnerValueLayout;
     private boolean spinnerValueLayoutVisibilityFlag =false; //handles on click visibility functionality
-    private TextView userName, spinnerValueCreative, spinnerValueReview, spinnerName;
+    private TextView userNameTextView, spinnerValueCreativeTextView, spinnerValueReviewTextView, spinnerNameTextView;
+    private CircleImageView profileImage;
+
+    private String userName, userEmail, userImage, userId;
 
     @Nullable
     @Override
@@ -27,6 +35,8 @@ public class FragmentCreatePost extends Fragment {
 
         //find elements
         findElements(view);
+
+        getUserDataFromCache();
 
         //spinner onclick handler
         spinner.setOnClickListener(new View.OnClickListener() {
@@ -43,23 +53,29 @@ public class FragmentCreatePost extends Fragment {
             }
         });
 
-        spinnerValueCreative.setOnClickListener(new View.OnClickListener() {
+        spinnerValueCreativeTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                spinnerName.setText(spinnerValueCreative.getText()); //set the value selected
+                spinnerNameTextView.setText(spinnerValueCreativeTextView.getText()); //set the value selected
                 spinnerValueLayout.setVisibility(View.GONE);
                 spinnerValueLayoutVisibilityFlag = false;
             }
         });
 
-        spinnerValueReview.setOnClickListener(new View.OnClickListener() {
+        spinnerValueReviewTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                spinnerName.setText(spinnerValueReview.getText()); //set the value selected
+                spinnerNameTextView.setText(spinnerValueReviewTextView.getText()); //set the value selected
                 spinnerValueLayout.setVisibility(View.GONE);
                 spinnerValueLayoutVisibilityFlag = false;
             }
         });
+
+        userNameTextView.setText(userName);
+        Glide.with(Objects.requireNonNull(getContext()))
+                .asBitmap()
+                .load(userImage)
+                .into(profileImage);
 
         return view;
     }
@@ -69,9 +85,20 @@ public class FragmentCreatePost extends Fragment {
         spinnerValueLayout = (LinearLayout) view.findViewById(R.id.create_post_spinner_value_layout);
 
         //textViews
-        userName = (TextView) view.findViewById(R.id.create_post_user_name);
-        spinnerValueCreative = (TextView) view.findViewById(R.id.create_post_spinner_value_creative_writing);
-        spinnerValueReview = (TextView) view.findViewById(R.id.create_post_spinner_value_book_review);
-        spinnerName = (TextView) view.findViewById(R.id.create_post_spinner_value_shown);
+        userNameTextView = (TextView) view.findViewById(R.id.create_post_user_name);
+        spinnerValueCreativeTextView = (TextView) view.findViewById(R.id.create_post_spinner_value_creative_writing);
+        spinnerValueReviewTextView = (TextView) view.findViewById(R.id.create_post_spinner_value_book_review);
+        spinnerNameTextView = (TextView) view.findViewById(R.id.create_post_spinner_value_shown);
+
+        profileImage = (CircleImageView) view.findViewById(R.id.create_post_profile_image);
+    }
+
+    void getUserDataFromCache(){
+        SharedPreferences userDetails = Objects.requireNonNull(getContext()).getSharedPreferences(getString(R.string.user_info_file), Context.MODE_PRIVATE);
+
+        userId = userDetails.getString(getString(R.string.user_info_file_userID), "");
+        userName = userDetails.getString(getString(R.string.user_info_file_name), "");
+        userEmail = userDetails.getString(getString(R.string.user_info_file_email), "");
+        userImage = userDetails.getString(getString(R.string.user_info_file_profileImage), "");
     }
 }

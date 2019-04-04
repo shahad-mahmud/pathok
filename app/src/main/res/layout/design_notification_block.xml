@@ -14,7 +14,7 @@
         android:layout_height="60dp"
         android:scaleType="centerCrop"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_launcher_background" />
+        android:src="@drawable/ic_user" />
 
     <RelativeLayout
         android:layout_width="wrap_content"

@@ -2,6 +2,7 @@ package com.exodia.shahad.pathok;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -56,6 +57,8 @@ public class ActivitySplash extends AppCompatActivity {
     private Button googleSignInButton;
     private static final int GOOGLE_LOGIN_RC = 2019;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().getDecorView().setSystemUiVisibility(
@@ -69,7 +72,7 @@ public class ActivitySplash extends AppCompatActivity {
         //find all the elements
         findElements();
 
-        if(isInternetAvailable()){
+        if(isInternetAvailable()){ //internet is available. proceed login
             //request google user's information
             GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestEmail()
@@ -83,37 +86,42 @@ public class ActivitySplash extends AppCompatActivity {
                 //hide the login/sign in buttons
                 fbContainer.setVisibility(View.GONE);
                 googleContainer.setVisibility(View.GONE);
-                progressBar.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE); //make the progress bar visible
 
-                if(isLoggedInFb()){
+                if(isLoggedInFb()){ //if logged in by FB. get user's info
                     getFbUserProfileData(AccessToken.getCurrentAccessToken());
-                }else if(isLoggedInGoogle()){
+                }else if(isLoggedInGoogle()){ //if logged in by Google. get user's info
                     getGoogleUserProfileData();
                 }
             }else{ //not logged in
+                //show the login and sign in buttons
                 fbContainer.setVisibility(View.VISIBLE);
                 googleContainer.setVisibility(View.VISIBLE);
-                progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE); //hide the progress bar
 
+                //user is trying to login with FB
                 fbLoginButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         logIntoFb();
                     }
                 });
+
+                //user is trying to login with FB
                 googleSignInButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        signIntoGoogle();
+                    public void onClick(View v) { signIntoGoogle();
                     }
                 });
             }
-        }else{
+        }else{ //internet is not available
+            //hide logo, login and sign in buttons and progress bar
             logo.setVisibility(View.GONE);
             fbContainer.setVisibility(View.GONE);
             googleContainer.setVisibility(View.GONE);
             progressBar.setVisibility(View.GONE);
 
+            //show no internet prompt
             noWifi.setVisibility(View.VISIBLE);
 //            Toast.makeText(this, "not internet", Toast.LENGTH_SHORT).show();
         }
@@ -188,7 +196,7 @@ public class ActivitySplash extends AppCompatActivity {
             account = completedTask.getResult(ApiException.class);
             getGoogleUserProfileData();
         } catch (ApiException e) {
-            Log.w("splash", "signInResult:failed code=" + e.getStatusCode());
+            Log.e("splash", "signInResult:failed code=" + e.getStatusCode());
         }
     }
 
@@ -217,7 +225,7 @@ public class ActivitySplash extends AppCompatActivity {
                     String userEmail = object.getString("email");
 
                     Profile profile = Profile.getCurrentProfile();
-                    String userImage = profile.getProfilePictureUri(50,50).toString();
+                    String userImage = profile.getProfilePictureUri(150,150).toString();
 
 //                    Log.e("fb infos, name", userName);
 //                    Log.e("fb infos, email", userEmail);

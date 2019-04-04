@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.exodia.shahad.pathok.Fragments.FragmentBooks;
 import com.exodia.shahad.pathok.Fragments.FragmentCreatePost;
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private MenuItem prevMenuItem;
     private Toolbar topNav;
 
+    private RelativeLayout topBarLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,18 +44,23 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.menu_home:
+                        topBarLayout.setVisibility(View.VISIBLE);
                         mainViewPager.setCurrentItem(0, true);
                         break;
                     case R.id.menu_notification:
+                        topBarLayout.setVisibility(View.VISIBLE);
                         mainViewPager.setCurrentItem(1, true);
                         break;
                     case R.id.menu_create_post:
+                        topBarLayout.setVisibility(View.GONE);
                         mainViewPager.setCurrentItem(2, true);
                         break;
                     case R.id.menu_profile:
+                        topBarLayout.setVisibility(View.VISIBLE);
                         mainViewPager.setCurrentItem(3, true);
                         break;
                     case R.id.menu_books:
+                        topBarLayout.setVisibility(View.VISIBLE);
                         mainViewPager.setCurrentItem(4, true);
                         break;
                 }
@@ -88,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
         mainViewPager = (ViewPager) findViewById(R.id.home_fragment_container);
         bottomNav = (BottomNavigationViewEx) findViewById(R.id.home_bottom_nav);
         topNav = (Toolbar) findViewById(R.id.home_top_nav);
+
+        topBarLayout = (RelativeLayout) findViewById(R.id.home_top_nav_layout);
     }
 
     private void setUpBottomNavigation(){

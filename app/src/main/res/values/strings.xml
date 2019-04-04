@@ -5,6 +5,13 @@
     <string name="facebook_app_id">281819542455161</string>
     <string name="fb_login_protocol_scheme">fb281819542455161</string>
 
+    //for cache
+    <string name="user_info_file">USER_INFO_FILE</string>
+    <string name="user_info_file_userID">userID</string>
+    <string name="user_info_file_name">name</string>
+    <string name="user_info_file_email">email</string>
+    <string name="user_info_file_profileImage">profileImage</string>
+
 
     //auto generated
     <string name="splash_logo">splash_logo</string>
@@ -25,4 +32,10 @@
     <string name="user_name">অমুক, তমুক এবং আরও ১৫ জন ইউজার তমুক করেছে।</string>
     <string name="has_done">তমুক করেছে।</string>
     <string name="time">সময়।</string>
+    <string name="user_name_profile">আবদুল্লাহ আল বাবুল</string>
+    <string name="user_bio">বাংলাদেশের একজন প্রখ্যাত শিক্ষাবিদ, বিজ্ঞান লেখক, বিজ্ঞান কর্মী এবং একজন সরকারি কর্মকর্তা। তবে তিনি আবদুল্লাহ আল-মুতী নামেই সমধিক পরিচিত। বাংলাদেশের বিজ্ঞান লেখকদের মধ্যে তিনিই একমাত্র যিনি ইউনেস্কো কলিঙ্গ পুরস্কার লাভ করেন।</string>
+    <string name="has_read_prompt">যে সব বই পড়েছি</string>
+    <string name="is_reading_prompt">যে সব বই পড়া হচ্ছে</string>
+    <string name="will_be_read">যে সব বই পড়া হবে</string>
+    <string name="post_prompt">যে সব পোস্ট করা হয়েছে</string>
 </resources>

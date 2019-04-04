@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/user_profile_cover_image"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@drawable/user_profile_cover_gradient"
+        android:contentDescription="@string/user_name" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_profile_user_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="105dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_user" />
+
+    <TextView
+        android:id="@+id/user_profile_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_profile_user_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:padding="2dp"
+        android:text="@string/user_name_profile"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_profile_user_image"
+        android:layout_marginTop="18dp"
+        android:layout_toEndOf="@id/user_profile_user_name"
+        android:padding="2dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_profile_badge_one"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_badge" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_profile_badge_two"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_badge_2" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/user_profile_user_bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_profile_user_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="45dp"
+        android:text="@string/user_bio"
+        android:textAlignment="center"
+        android:textSize="16sp" />
+
+    <!--badges-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/user_profile_badges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_profile_user_bio"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="50dp" />
+
+    <!--book that have been read-->
+    <TextView
+        android:id="@+id/user_profile_has_read_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_profile_badges"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/up_strock"
+        android:padding="4dp"
+        android:text="@string/has_read_prompt" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/user_profile_has_read"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_profile_has_read_prompt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp" />
+
+    <!--book that is being read-->
+    <TextView
+        android:id="@+id/user_profile_is_reading_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_profile_has_read"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/up_strock"
+        android:padding="4dp"
+        android:text="@string/is_reading_prompt" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/user_profile_is_reading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_profile_is_reading_prompt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp" />
+
+    <!--book that will be read-->
+    <TextView
+        android:id="@+id/user_profile_will_read_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_profile_is_reading"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/up_strock"
+        android:padding="4dp"
+        android:text="@string/will_be_read" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/user_profile_will_read"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_profile_will_read_prompt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp" />
+
+    <!--the posts-->
+    <TextView
+        android:id="@+id/user_profile_posts_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_profile_will_read"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/up_down_strock"
+        android:padding="4dp"
+        android:text="@string/post_prompt" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/user_profile_posts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_profile_posts_prompt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp" />
+</RelativeLayout>
