@@ -49,7 +49,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/arrow_drop_down"/>
+                    android:src="@drawable/arrow_drop_down" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
@@ -59,6 +59,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/create_post_header_layout"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         android:paddingBottom="1dp"
         android:visibility="gone">
@@ -95,12 +97,12 @@
 
 
     <EditText
-        android:layout_marginBottom="45dp"
         android:id="@+id/create_post_edit_the_post"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/create_post_spinner_value_layout"
         android:layout_marginTop="4dp"
+        android:layout_marginBottom="45dp"
         android:background="@null"
         android:gravity="start"
         android:hint="@string/edit_text_hint"
@@ -108,10 +110,10 @@
         android:padding="2dp" />
 
     <RelativeLayout
-        android:layout_alignParentBottom="true"
         android:id="@+id/create_post_select_book"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/click_effect"
         android:clickable="true"
         android:focusable="true"

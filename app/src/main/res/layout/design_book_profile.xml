@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/book_profile_book_image_back"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_centerHorizontal="true"
+        android:alpha="0.1"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_book" />
+
+    <ImageView
+        android:id="@+id/book_profile_book_image"
+        android:layout_width="190dp"
+        android:layout_height="240dp"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_book" />
+
+    <TextView
+        android:id="@+id/book_profile_book_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/book_profile_book_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:padding="2dp"
+        android:text="@string/book_name"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/book_profile_author_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/book_profile_book_name"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/author_name"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/book_profile_about_book"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/book_profile_author_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/up_strock"
+        android:padding="2dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:text="@string/about_book"
+        android:textSize="15sp" />
+
+    <RatingBar
+        android:id="@+id/book_profile_rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/book_profile_about_book"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/up_strock"
+        android:numStars="5"
+        android:progressTint="@color/colorAccent"
+        android:stepSize="1" />
+
+    <TextView
+        android:id="@+id/book_profile_average_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/book_profile_rating_bar"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/down_stroke"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="4dp"
+        android:text="@string/book_rating"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:id="@+id/book_profile_reading_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/book_profile_average_rating"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/book_profile_is_reading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_border"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="4dp"
+            android:text="@string/is_reading" />
+
+        <TextView
+            android:id="@+id/book_profile_want_to_read"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/rounded_border"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="4dp"
+            android:text="@string/want_to_read" />
+
+        <TextView
+            android:id="@+id/book_profile_has_read"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/rounded_border"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="4dp"
+            android:text="@string/has_read" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/book_profile_more_books_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/book_profile_reading_options"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/up_strock"
+        android:paddingStart="2dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="2dp"
+        android:paddingBottom="4dp"
+        android:text="@string/book_recommendation" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/book_profile_more_books"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/book_profile_more_books_prompt"
+        android:layout_marginTop="4dp" />
+
+    <TextView
+        android:id="@+id/book_profile_reviews_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/book_profile_more_books"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/up_down_strock"
+        android:paddingStart="2dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="2dp"
+        android:paddingBottom="8dp"
+        android:text="@string/book_reviews" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/book_profile_reviews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/book_profile_reviews_prompt"
+        android:layout_marginTop="4dp" />
+</RelativeLayout>

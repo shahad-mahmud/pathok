@@ -6,9 +6,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.exodia.shahad.pathok.Fragments.FragmentBooks;
 import com.exodia.shahad.pathok.Fragments.FragmentCreatePost;
@@ -25,8 +29,17 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationViewEx bottomNav;
     private MenuItem prevMenuItem;
     private Toolbar topNav;
+    private TextView postButton;
 
     private RelativeLayout topBarLayout;
+
+    private FragmentCreatePost createPost;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.top_menu,menu);
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,28 +52,32 @@ public class MainActivity extends AppCompatActivity {
 
         mainViewPager.setOffscreenPageLimit(4); //4 pages in offScreen won't be destroyed
 
+        setSupportActionBar(topNav);
+
+        postButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createPost.makePost();
+            }
+        });
+
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.menu_home:
-                        topBarLayout.setVisibility(View.VISIBLE);
                         mainViewPager.setCurrentItem(0, true);
                         break;
                     case R.id.menu_notification:
-                        topBarLayout.setVisibility(View.VISIBLE);
                         mainViewPager.setCurrentItem(1, true);
                         break;
                     case R.id.menu_create_post:
-                        topBarLayout.setVisibility(View.GONE);
                         mainViewPager.setCurrentItem(2, true);
                         break;
                     case R.id.menu_profile:
-                        topBarLayout.setVisibility(View.VISIBLE);
                         mainViewPager.setCurrentItem(3, true);
                         break;
                     case R.id.menu_books:
-                        topBarLayout.setVisibility(View.VISIBLE);
                         mainViewPager.setCurrentItem(4, true);
                         break;
                 }
@@ -69,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            Menu menu = topNav.getMenu();
+            boolean isMenuShowing = true;
+
             @Override
             public void onPageScrolled(int i, float v, int i1) {
 
@@ -84,6 +104,18 @@ public class MainActivity extends AppCompatActivity {
 
                 prevMenuItem = bottomNav.getMenu().getItem(i); //this will be the previous menu item
                 prevMenuItem.setChecked(true); //this frag was selected
+
+                if(prevMenuItem == bottomNav.getMenu().getItem(2) && isMenuShowing){
+                    topNav.getMenu().clear();
+                    isMenuShowing = false;
+
+                    postButton.setVisibility(View.VISIBLE);
+                }else if(!isMenuShowing){
+                    onCreateOptionsMenu(menu);
+                    isMenuShowing = true;
+
+                    postButton.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -99,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
         topNav = (Toolbar) findViewById(R.id.home_top_nav);
 
         topBarLayout = (RelativeLayout) findViewById(R.id.home_top_nav_layout);
+
+        postButton = findViewById(R.id.create_post_post_button);
     }
 
     private void setUpBottomNavigation(){
@@ -109,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigtionPagerAdapter adapter = new BottomNavigtionPagerAdapter(getSupportFragmentManager());
         FragmentHome home = new FragmentHome();
         FragmentNotifications notifications = new FragmentNotifications();
-        FragmentCreatePost createPost = new FragmentCreatePost();
+        createPost = new FragmentCreatePost();
         FragmentProfile profile = new FragmentProfile();
         FragmentBooks books = new FragmentBooks();
 

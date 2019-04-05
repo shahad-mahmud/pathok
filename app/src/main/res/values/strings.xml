@@ -38,4 +38,11 @@
     <string name="is_reading_prompt">যে সব বই পড়া হচ্ছে</string>
     <string name="will_be_read">যে সব বই পড়া হবে</string>
     <string name="post_prompt">যে সব পোস্ট করা হয়েছে</string>
+    <string name="book_name">বইয়ের নাম</string>
+    <string name="author_name">লেখকের নাম</string>
+    <string name="about_book">এই বই অনেক ভাল এই বই অনেক ভাল এই বই অনেক ভাল এই বই অনেক ভাল এই বই অনেক ভাল এই বই অনেক ভাল এই বই অনেক ভাল এই বই অনেক ভাল এই বই অনেক ভাল এই বই অনেক ভাল এই বই অনেক ভাল এই বই অনেক ভাল এই বই অনেক ভাল এই বই অনেক ভাল এই বই অনেক ভাল</string>
+    <string name="book_rating">গড় রেটিংঃ ৪.৫</string>
+    <string name="book_recommendation">এ ধরণের আরও কিছু বই</string>
+    <string name="book_reviews">এই বই সম্পর্কিত মন্তব্যসমূহ</string>
+    <string name="post">পোস্ট করুন</string>
 </resources>

@@ -24,6 +24,7 @@
 
         <!--the activities-->
         <activity android:name=".MainActivity"/>
+        <activity android:name=".BookProfileActivity"/>
 
         <!--fb login starts-->
         <meta-data

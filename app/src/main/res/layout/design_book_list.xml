@@ -13,6 +13,7 @@
         android:src="@drawable/ic_book" />
 
     <TextView
+        android:id="@+id/book_list_book_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/book_list_book_image"

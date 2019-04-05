@@ -9,8 +9,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.exodia.shahad.pathok.R;
@@ -25,6 +28,8 @@ public class FragmentCreatePost extends Fragment {
     private boolean spinnerValueLayoutVisibilityFlag =false; //handles on click visibility functionality
     private TextView userNameTextView, spinnerValueCreativeTextView, spinnerValueReviewTextView, spinnerNameTextView;
     private CircleImageView profileImage;
+    private EditText editText;
+    private RelativeLayout selectBook;
 
     private String userName, userEmail, userImage, userId;
 
@@ -58,6 +63,7 @@ public class FragmentCreatePost extends Fragment {
             public void onClick(View v) {
                 spinnerNameTextView.setText(spinnerValueCreativeTextView.getText()); //set the value selected
                 spinnerValueLayout.setVisibility(View.GONE);
+                selectBook.setVisibility(View.GONE);
                 spinnerValueLayoutVisibilityFlag = false;
             }
         });
@@ -67,6 +73,7 @@ public class FragmentCreatePost extends Fragment {
             public void onClick(View v) {
                 spinnerNameTextView.setText(spinnerValueReviewTextView.getText()); //set the value selected
                 spinnerValueLayout.setVisibility(View.GONE);
+                selectBook.setVisibility(View.VISIBLE);
                 spinnerValueLayoutVisibilityFlag = false;
             }
         });
@@ -91,6 +98,19 @@ public class FragmentCreatePost extends Fragment {
         spinnerNameTextView = (TextView) view.findViewById(R.id.create_post_spinner_value_shown);
 
         profileImage = (CircleImageView) view.findViewById(R.id.create_post_profile_image);
+
+        editText = view.findViewById(R.id.create_post_edit_the_post);
+
+        selectBook = view.findViewById(R.id.create_post_select_book);
+    }
+
+    public void makePost(){
+        String post_data = editText.getText().toString();
+        Toast.makeText(getContext(), post_data, Toast.LENGTH_SHORT).show();
+
+        if(post_data.equals("")){
+            Toast.makeText(getContext(), "You must write your post.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     void getUserDataFromCache(){
