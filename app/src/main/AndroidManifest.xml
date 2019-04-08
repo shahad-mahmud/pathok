@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivitySplash">
+        <activity android:name=".activities.ActivitySearchBook">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,8 +23,9 @@
         </activity>
 
         <!--the activities-->
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".BookProfileActivity"/>
+        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.BookProfileActivity" />
+        <!--<activity android:name=".activities.ActivitySearchBook"/>-->
 
         <!--fb login starts-->
         <meta-data

@@ -1,9 +1,8 @@
-package com.exodia.shahad.pathok.BackgroundWorkers;
+package com.exodia.shahad.pathok.backgroundWorkers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.exodia.shahad.pathok.R;

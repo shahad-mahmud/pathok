@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="2dp"
+    android:layout_marginEnd="2dp"
+    android:layout_marginBottom="4dp"
+    android:background="@drawable/click_effect"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="4dp">
+
+    <ImageView
+        android:id="@+id/book_search_list_book_image"
+        android:layout_width="70dp"
+        android:layout_height="90dp"
+        android:contentDescription="@string/book_name"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_book" />
+
+    <LinearLayout
+        android:id="@+id/book_search_list_details_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@id/book_search_list_book_image"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/book_search_list_book_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:text="@string/book_name"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/book_search_list_book_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:text="@string/author_name"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</RelativeLayout>

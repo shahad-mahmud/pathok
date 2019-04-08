@@ -45,4 +45,5 @@
     <string name="book_recommendation">এ ধরণের আরও কিছু বই</string>
     <string name="book_reviews">এই বই সম্পর্কিত মন্তব্যসমূহ</string>
     <string name="post">পোস্ট করুন</string>
+    <string name="search_book">বই খুঁজুন</string>
 </resources>

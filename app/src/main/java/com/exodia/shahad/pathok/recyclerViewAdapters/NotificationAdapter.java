@@ -1,4 +1,4 @@
-package com.exodia.shahad.pathok.RecyclerViewAdapters;
+package com.exodia.shahad.pathok.recyclerViewAdapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

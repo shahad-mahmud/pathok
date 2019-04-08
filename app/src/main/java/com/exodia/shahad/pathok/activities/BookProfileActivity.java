@@ -1,4 +1,4 @@
-package com.exodia.shahad.pathok;
+package com.exodia.shahad.pathok.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,7 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.exodia.shahad.pathok.RecyclerViewAdapters.BookProfileAdapter;
+import com.exodia.shahad.pathok.R;
+import com.exodia.shahad.pathok.recyclerViewAdapters.BookProfileAdapter;
 
 public class BookProfileActivity extends AppCompatActivity {
 

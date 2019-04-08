@@ -1,8 +1,7 @@
-package com.exodia.shahad.pathok;
+package com.exodia.shahad.pathok.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -15,7 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.exodia.shahad.pathok.BackgroundWorkers.BackgroundLoginManager;
+import com.exodia.shahad.pathok.backgroundWorkers.BackgroundLoginManager;
+import com.exodia.shahad.pathok.R;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;

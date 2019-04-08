@@ -1,4 +1,4 @@
-package com.exodia.shahad.pathok.Fragments;
+package com.exodia.shahad.pathok.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.exodia.shahad.pathok.R;
-import com.exodia.shahad.pathok.RecyclerViewAdapters.HomeFeedAdapter;
+import com.exodia.shahad.pathok.recyclerViewAdapters.HomeFeedAdapter;
 
 public class FragmentHome extends Fragment {
     RecyclerView homePostFeedRecycler;

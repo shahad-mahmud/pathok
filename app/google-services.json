@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "718447869424",
+    "firebase_url": "https://pathok.firebaseio.com",
+    "project_id": "pathok",
+    "storage_bucket": "pathok.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:718447869424:android:2e7d1e82754b69cf",
+        "android_client_info": {
+          "package_name": "com.exodia.shahad.pathok"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "718447869424-s8ujag3062c629f9ecdt5sc1c2kn6uc8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.exodia.shahad.pathok",
+            "certificate_hash": "0751a7f6af7219533e745b4100f461fd512fa0ae"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtJasrSOSgrfvN4h5ifjjssuaYlE6Ehrw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "718447869424-t96hp2782lao74cthlfbo2r5ui86jroe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

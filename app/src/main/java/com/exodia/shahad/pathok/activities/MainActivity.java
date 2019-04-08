@@ -1,4 +1,4 @@
-package com.exodia.shahad.pathok;
+package com.exodia.shahad.pathok.activities;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -6,19 +6,20 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.exodia.shahad.pathok.Fragments.FragmentBooks;
-import com.exodia.shahad.pathok.Fragments.FragmentCreatePost;
-import com.exodia.shahad.pathok.Fragments.FragmentHome;
-import com.exodia.shahad.pathok.Fragments.FragmentNotifications;
-import com.exodia.shahad.pathok.Fragments.FragmentProfile;
+import com.exodia.shahad.pathok.BottomNavHandler;
+import com.exodia.shahad.pathok.BottomNavigtionPagerAdapter;
+import com.exodia.shahad.pathok.fragments.FragmentBooks;
+import com.exodia.shahad.pathok.fragments.FragmentCreatePost;
+import com.exodia.shahad.pathok.fragments.FragmentHome;
+import com.exodia.shahad.pathok.fragments.FragmentNotifications;
+import com.exodia.shahad.pathok.fragments.FragmentProfile;
+import com.exodia.shahad.pathok.R;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class MainActivity extends AppCompatActivity {

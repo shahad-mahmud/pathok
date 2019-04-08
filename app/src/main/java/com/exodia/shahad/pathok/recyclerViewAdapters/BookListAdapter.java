@@ -1,4 +1,4 @@
-package com.exodia.shahad.pathok.RecyclerViewAdapters;
+package com.exodia.shahad.pathok.recyclerViewAdapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.exodia.shahad.pathok.BookProfileActivity;
+import com.exodia.shahad.pathok.activities.BookProfileActivity;
 import com.exodia.shahad.pathok.R;
 
 public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

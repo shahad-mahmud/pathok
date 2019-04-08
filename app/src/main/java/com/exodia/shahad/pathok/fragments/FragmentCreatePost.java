@@ -1,4 +1,4 @@
-package com.exodia.shahad.pathok.Fragments;
+package com.exodia.shahad.pathok.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;

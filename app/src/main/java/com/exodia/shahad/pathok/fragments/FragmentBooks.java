@@ -1,4 +1,4 @@
-package com.exodia.shahad.pathok.Fragments;
+package com.exodia.shahad.pathok.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,9 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.exodia.shahad.pathok.BackgroundWorkers.BackgroundBookCategoryLoader;
+import com.exodia.shahad.pathok.backgroundWorkers.BackgroundBookCategoryLoader;
 import com.exodia.shahad.pathok.R;
-import com.exodia.shahad.pathok.RecyclerViewAdapters.BrowseBookCategoryAdapter;
+import com.exodia.shahad.pathok.recyclerViewAdapters.BrowseBookCategoryAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
