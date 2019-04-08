@@ -1,7 +1,26 @@
 package com.exodia.shahad.pathok.dataClasses;
 
+import java.util.List;
+
 public class BookData {
     private String bookId, bookName, bookImage, bookDescription;
+    private List<String> authorIds, authorNames;
+
+    public List<String> getAuthorIds() {
+        return authorIds;
+    }
+
+    public void setAuthorIds(List<String> authorIds) {
+        this.authorIds = authorIds;
+    }
+
+    public List<String> getAuthorNames() {
+        return authorNames;
+    }
+
+    public void setAuthorNames(List<String> authorNames) {
+        this.authorNames = authorNames;
+    }
 
     public BookData() {
 
@@ -42,4 +61,6 @@ public class BookData {
     public void setBookDescription(String bookDescription) {
         this.bookDescription = bookDescription;
     }
+
+
 }

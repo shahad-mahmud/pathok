@@ -37,16 +37,37 @@ public class BookSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         BookSearchViewHolder bookSearchViewHolder = (BookSearchViewHolder) viewHolder;
         BookData currentBook = bookDataList.get(i);
+        List<String> authorNameList;
+        String author_name = "";
+
+        authorNameList = new ArrayList<>();
 
         String imageUrl = "https://db.pathok.xyz/uploads/books/" + currentBook.getBookImage();
 
-        Log.e("image", imageUrl);
+//        Log.e("image", imageUrl);
 
         bookSearchViewHolder.bookName.setText(currentBook.getBookName());
         Glide.with(context)
                 .asBitmap()
                 .load(imageUrl)
                 .into(bookSearchViewHolder.bookImage);
+
+        authorNameList = currentBook.getAuthorNames();
+
+        if (authorNameList.size() == 1) {
+            author_name = author_name + authorNameList.get(0);
+        } else if (authorNameList.size() == 2) {
+            author_name = author_name + authorNameList.get(0) + " ও " + authorNameList.get(1);
+        } else {
+            int size = authorNameList.size();
+            int j = 0;
+            for (j = 0; j < size - 2; j++) {
+                author_name = author_name + authorNameList.get(i) + ", ";
+            }
+            author_name = author_name + authorNameList.get(j) + " ও " + authorNameList.get(j + 1);
+        }
+
+        bookSearchViewHolder.author.setText(author_name);
 
     }
 

@@ -107,9 +107,35 @@ public class ActivitySearchBook extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    BookData bookData = data.getValue(BookData.class);
+                    BookData bookData = new BookData();
+                    List<String> author_names, author_ids;
 
-//                    Log.e("bookName", Objects.requireNonNull(bookData).getBookName());
+                    author_ids = new ArrayList<>();
+                    author_names = new ArrayList<>();
+
+                    String book_id = Objects.requireNonNull(data.child("bookId").getValue()).toString();
+                    String book_name = Objects.requireNonNull(data.child("bookName").getValue()).toString();
+                    String book_image = Objects.requireNonNull(data.child("bookImage").getValue()).toString();
+                    String book_des = Objects.requireNonNull(data.child("bookDescription").getValue()).toString();
+
+                    DataSnapshot ds = data.child("bookAuthors");
+                    for (DataSnapshot authors : ds.getChildren()) {
+                        String author_id = Objects.requireNonNull(authors.child("author_id").getValue()).toString();
+                        String author_name = Objects.requireNonNull(authors.child("author_name").getValue()).toString();
+
+                        author_ids.add(author_id);
+                        author_names.add(author_name);
+                    }
+
+
+//                    Log.e("num of author", String.valueOf(data.child("bookAuthors").getChildrenCount()));
+
+                    bookData.setBookId(book_id);
+                    bookData.setBookName(book_name);
+                    bookData.setBookImage(book_image);
+                    bookData.setBookDescription(book_des);
+                    bookData.setAuthorIds(author_ids);
+                    bookData.setAuthorNames(author_names);
 
                     bookDataList.add(bookData);
 //                    Log.e("size", String.valueOf(bookDataList.size()));
