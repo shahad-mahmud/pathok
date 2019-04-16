@@ -1,6 +1,8 @@
 package com.exodia.shahad.pathok.recyclerViewAdapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -18,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    Context context;
+    private Context context;
     List<BookData> bookDataList;
 
     public BookSearchAdapter(Context context, List<BookData> bookDataList) {
@@ -36,13 +39,13 @@ public class BookSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         BookSearchViewHolder bookSearchViewHolder = (BookSearchViewHolder) viewHolder;
-        BookData currentBook = bookDataList.get(i);
+        final BookData currentBook = bookDataList.get(i);
         List<String> authorNameList;
         String author_name = "";
 
         authorNameList = new ArrayList<>();
 
-        String imageUrl = "https://db.pathok.xyz/uploads/books/" + currentBook.getBookImage();
+        final String imageUrl = "https://db.pathok.xyz/uploads/books/" + currentBook.getBookImage();
 
 //        Log.e("image", imageUrl);
 
@@ -60,7 +63,7 @@ public class BookSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             author_name = author_name + authorNameList.get(0) + " ও " + authorNameList.get(1);
         } else {
             int size = authorNameList.size();
-            int j = 0;
+            int j;
             for (j = 0; j < size - 2; j++) {
                 author_name = author_name + authorNameList.get(i) + ", ";
             }
@@ -68,6 +71,24 @@ public class BookSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
 
         bookSearchViewHolder.author.setText(author_name);
+
+
+        //onclick book add to post handler
+        final String finalAuthor_name = author_name;
+        bookSearchViewHolder.bookSearchResultLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent returnIntent = new Intent();
+
+                returnIntent.putExtra("book_id", currentBook.getBookId());
+                returnIntent.putExtra("book_name", currentBook.getBookName());
+                returnIntent.putExtra("book_author", finalAuthor_name);
+                returnIntent.putExtra("book_image", imageUrl);
+
+                ((Activity) context).setResult(Activity.RESULT_OK, returnIntent);
+                ((Activity) context).finish();
+            }
+        });
 
     }
 
@@ -90,6 +111,7 @@ public class BookSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         ImageView bookImage;
         TextView bookName, author;
+        RelativeLayout bookSearchResultLayout;
 
         BookSearchViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -97,6 +119,7 @@ public class BookSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             bookImage = itemView.findViewById(R.id.book_search_list_book_image);
             bookName = itemView.findViewById(R.id.book_search_list_book_name);
             author = itemView.findViewById(R.id.book_search_list_book_author);
+            bookSearchResultLayout = itemView.findViewById(R.id.book_search_list_layout);
         }
     }
 }

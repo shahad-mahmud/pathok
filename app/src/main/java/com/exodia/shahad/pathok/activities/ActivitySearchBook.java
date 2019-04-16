@@ -55,7 +55,7 @@ public class ActivitySearchBook extends AppCompatActivity {
 
 //        Log.e("bookList", String.valueOf(bookDataList.size()));
 
-        adapter = new BookSearchAdapter(getApplicationContext(), bookDataList);
+        adapter = new BookSearchAdapter(this, bookDataList);
         bookSearchRecycler.setAdapter(adapter);
 
         searchingKey.addTextChangedListener(new TextWatcher() {
@@ -97,7 +97,6 @@ public class ActivitySearchBook extends AppCompatActivity {
 
     void getDataFromFireBase() {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseDatabase.setPersistenceEnabled(true);
         DatabaseReference reference = firebaseDatabase.getReference("books");
         reference.keepSynced(true);
 
